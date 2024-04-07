@@ -14,6 +14,50 @@ body {
 h1, h2 {
     text-align: center;
 }
+
+/* CSS for sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Adjust the width as needed */
+    height: 100%;
+    background-color: #f4f4f4; /* Sidebar background color */
+    padding: 20px; /* Add padding to the sidebar */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
+.sidebar h3 {
+    margin-top: 0; /* Remove default margin for heading */
+    margin-bottom: 10px; /* Add margin below heading */
+}
+
+.sidebar label {
+    display: block; /* Display labels as block elements */
+    margin-bottom: 5px; /* Add margin below labels */
+}
+
+.sidebar input {
+    width: 100%; /* Make input fields fill the sidebar width */
+    padding: 8px; /* Add padding to input fields */
+    margin-bottom: 10px; /* Add margin below input fields */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
+.sidebar select {
+    width: 100%; /* Make input fields fill the sidebar width */
+    padding: 8px; /* Add padding to input fields */
+    margin-bottom: 10px; /* Add margin below input fields */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
+/* CSS for main content */
+.content {
+    margin-left: 250px; /* Adjust based on sidebar width */
+    padding: 20px; /* Add padding to main content area */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(9, 1fr);

@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href = "manageandtrack.css">
+    <link rel="stylesheet" href="manageandtrack.css">
     <title>Lab Resource Booking</title>
 </head>
 <body>
-    <h1>Lab Resource Booking</h1>
-    <h2>Resource Allocation Tracking</h2>
-    <div class="container">
-
-        <div class="grid" id="seatGrid">
-            <!-- Grid for seats will be generated dynamically -->
-        </div>
-        <div class="center">
-            <button onclick="allocateResource()">Book Selected Seats</button>
-            <button onclick="completeBooking()">Done</button>
-        </div>
-        
-
-        <hr>
+    <div class="sidebar">
+        <h3>Booking Details</h3>
+        <label for="labName">Lab Name:</label>
+        <select id="labName">
+            <option value="lab1">Lab 1</option>
+            <option value="lab2">Lab 2</option>
+            <option value="lab3">Lab 3</option>
+            <!-- Add more options as needed -->
+        </select>
 
 
-        <div id="allocationList">
-            <!-- Allocation tracking information will be displayed here -->
+        <label for="bookingDate">Date:</label>
+        <input type="date" id="bookingDate">
+
+        <label for="bookingTime">Time:</label>
+        <input type="time" id="bookingTime">
+    </div>
+
+    <div class="content">
+        <h1>Lab Resource Booking</h1>
+        <h2>Resource Allocation Tracking</h2>
+        <div class="container">
+            <div class="grid" id="seatGrid">
+                <!-- Grid for seats will be generated dynamically -->
+            </div>
+            <div class="center">
+                <button onclick="allocateResource()">Book Selected Seats</button>
+                <button onclick="completeBooking()">Done</button>
+            </div>
+            <hr>
+            <div id="allocationList">
+                <!-- Allocation tracking information will be displayed here -->
+            </div>
         </div>
     </div>
 
