@@ -68,8 +68,8 @@ function completeBooking() {
 
     // Retrieve selected lab, time from, and time to information
     const selectedLab = document.getElementById("labName").value;
-    const selectedTimeFrom = document.getElementById("timeFrom").value;
-    const selectedTimeTo = document.getElementById("timeTo").value;
+    const selectedSlotFrom = document.getElementById("fromSlot").value;
+    const selectedSlotTo = document.getElementById("toSlot").value;
 
     // Create an array to hold the booking data
     const bookingData = [];
@@ -78,8 +78,8 @@ function completeBooking() {
             row: seat.dataset.row,
             col: seat.dataset.col,
             lab: selectedLab,
-            timeFrom: selectedTimeFrom,
-            timeTo: selectedTimeTo
+            slotFrom: selectedSlotFrom,
+            slotTo: selectedSlotTo
         };
         bookingData.push(seatData);
         console.log(bookingData);
