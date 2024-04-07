@@ -11,6 +11,10 @@ function generateGrid(selectedLab) {
     const lab = labDetails[selectedLab];
     const rows = lab.rows;
     const cols = lab.cols;
+    const elements = document.querySelectorAll(".grid");
+    elements.forEach(element => {
+        element.style.gridTemplateColumns = `repeat(${rows}, 1fr)`;
+    });
     
     // Clear existing grid
     const seatGrid = document.getElementById("seatGrid");
