@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1, h2 {
+    text-align: center;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.seat {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+.seat.selected {
+    background-color: lightgreen; /* Highlighted color */
+}
+.seat.booked {
+    background-color: #f00; /* Booked seat color */
+    pointer-events: none; /* Disable clicking on booked seats */
+}
+
+.center{
+text-align: center;
+}
+
+button{
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover{
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+/* Add CSS styling for reserved seats */
+.seat.booked {
+    background-color: #ccc; /* Use a different color or styling to indicate booked seats */
+}
