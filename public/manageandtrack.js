@@ -39,5 +39,19 @@ document.getElementById("labName").addEventListener("change", function() {
     generateGrid(selectedLab);
 });
 
+// Toggle seat selection
+seatGrid.addEventListener("click", function(event) {
+    const seat = event.target;
+    if (seat.classList.contains("seat") && !seat.classList.contains("booked")) {
+        if (seat.classList.contains("selected")) {
+            // If the seat is already selected, deselect it
+            seat.classList.remove("selected");
+        } else {
+            // If the seat is not selected, select it
+            seat.classList.add("selected");
+        }
+    }
+});
+
 // Initialize grid for default selected lab
 generateGrid(document.getElementById("labName").value);
