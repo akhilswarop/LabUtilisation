@@ -9,6 +9,7 @@ const labDetails = {
 let selectedLab = document.getElementById("labName").value;
 let selectedSlotFrom = document.getElementById("fromSlot").value;
 let selectedSlotTo = document.getElementById("toSlot").value;
+let selectedDate = document.getElementById("bookingDate").value;
 // Function to generate grid for selected lab
 function generateGrid(selectedLab) {
     const lab = labDetails[selectedLab];
@@ -87,7 +88,8 @@ function completeBooking() {
             col: seat.dataset.col,
             lab: selectedLab,
             slotFrom: selectedSlotFrom,
-            slotTo: selectedSlotTo
+            slotTo: selectedSlotTo,
+            date: selectedDate
         };
         bookingData.push(seatData);
         console.log(bookingData);
@@ -124,6 +126,7 @@ async function fetchAndDisplayBookedSeats() {
             const lab = seat.lab;
             const slotFrom = parseInt(seat.slotFrom);
             const slotTo = parseInt(seat.slotTo);
+            const date = seat.date;
             const labSelector = `.seat[data-row="${seat.row}"][data-col="${seat.col}"]`;
 
             // Check if the booked seat belongs to the selected lab and time slot range
@@ -134,6 +137,8 @@ async function fetchAndDisplayBookedSeats() {
                     (selectedSlotTo >= slotFrom && selectedSlotTo <= slotTo) ||      // Check if selected to time is within booked slot
                     (selectedSlotFrom <= slotFrom && selectedSlotTo >= slotTo)       // Check if selected slot fully contains booked slot
                 )
+                &&
+                date === selectedDate
             ) {
                 const seatElement = document.querySelector(labSelector);
                 if (seatElement) {
@@ -179,6 +184,10 @@ document.getElementById("fromSlot").addEventListener("change", function() {
 });
 document.getElementById("toSlot").addEventListener("change", function() {
     selectedSlotTo = this.value; // Update selectedLab when the dropdown changes
+    fetchAndDisplayBookedSeats(); // Call fetchAndDisplayBookedSeats to update the booked seats display
+});
+document.getElementById("bookingDate").addEventListener("change", function() {
+    selectedDate = this.value; // Update selectedLab when the dropdown changes
     fetchAndDisplayBookedSeats(); // Call fetchAndDisplayBookedSeats to update the booked seats display
 });
 // Initialize grid for default selected lab
