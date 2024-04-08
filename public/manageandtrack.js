@@ -7,7 +7,8 @@ const labDetails = {
 };
 
 let selectedLab = document.getElementById("labName").value;
-let selectedSlot = "";
+let selectedSlotFrom = document.getElementById("fromSlot").value;
+let selectedSlotTo = document.getElementById("toSlot").value;
 // Function to generate grid for selected lab
 function generateGrid(selectedLab) {
     const lab = labDetails[selectedLab];
@@ -138,12 +139,19 @@ async function fetchAndDisplayBookedSeats() {
                 if (seatElement) {
                     seatElement.classList.add('booked');
                 }
+            } else {
+                // If the seat is not in the booked slot, remove the 'booked' class
+                const seatElement = document.querySelector(labSelector);
+                if (seatElement && seatElement.classList.contains('booked')) {
+                    seatElement.classList.remove('booked');
+                }
             }
         });
     } catch (error) {
         console.error('Error fetching booked seats:', error);
     }
 }
+
 
 // Call fetchAndDisplayBookedSeats when the page loads
 window.addEventListener('load', fetchAndDisplayBookedSeats);
