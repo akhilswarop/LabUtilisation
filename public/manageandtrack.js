@@ -126,7 +126,14 @@ async function fetchAndDisplayBookedSeats() {
             const labSelector = `.seat[data-row="${seat.row}"][data-col="${seat.col}"]`;
 
             // Check if the booked seat belongs to the selected lab and time slot range
-            if (lab === selectedLab) {
+            if (
+                lab === selectedLab &&
+                (
+                    (selectedSlotFrom >= slotFrom && selectedSlotFrom <= slotTo) ||  // Check if selected from time is within booked slot
+                    (selectedSlotTo >= slotFrom && selectedSlotTo <= slotTo) ||      // Check if selected to time is within booked slot
+                    (selectedSlotFrom <= slotFrom && selectedSlotTo >= slotTo)       // Check if selected slot fully contains booked slot
+                )
+            ) {
                 const seatElement = document.querySelector(labSelector);
                 if (seatElement) {
                     seatElement.classList.add('booked');
@@ -156,6 +163,14 @@ seatGrid.addEventListener("click", function(event) {
 });
 document.getElementById("labName").addEventListener("change", function() {
     selectedLab = this.value; // Update selectedLab when the dropdown changes
+    fetchAndDisplayBookedSeats(); // Call fetchAndDisplayBookedSeats to update the booked seats display
+});
+document.getElementById("fromSlot").addEventListener("change", function() {
+    selectedSlotFrom = this.value; // Update selectedLab when the dropdown changes
+    fetchAndDisplayBookedSeats(); // Call fetchAndDisplayBookedSeats to update the booked seats display
+});
+document.getElementById("toSlot").addEventListener("change", function() {
+    selectedSlotTo = this.value; // Update selectedLab when the dropdown changes
     fetchAndDisplayBookedSeats(); // Call fetchAndDisplayBookedSeats to update the booked seats display
 });
 // Initialize grid for default selected lab
