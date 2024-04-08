@@ -6,6 +6,8 @@ const labDetails = {
     // Add more labs as needed
 };
 
+let selectedLab = document.getElementById("labName").value;
+let selectedSlot = "";
 // Function to generate grid for selected lab
 function generateGrid(selectedLab) {
     const lab = labDetails[selectedLab];
@@ -63,14 +65,19 @@ function allocateResource() {
 
 // Function to handle complete booking
 function completeBooking() {
+
     // Retrieve selected seats (assuming stored locally)
     const selectedSeats = document.querySelectorAll(".seat.booked");
 
     // Retrieve selected lab, time from, and time to information
+    const selectedDate = document.getElementById("bookingDate").value;
     const selectedLab = document.getElementById("labName").value;
     const selectedSlotFrom = document.getElementById("fromSlot").value;
     const selectedSlotTo = document.getElementById("toSlot").value;
-
+    if (selectedLab == '' || selectedDate == '' || selectedSlotFrom == '' || selectedSlotTo == '') {
+        alert("Please select lab, date, time slots before completing the booking.");
+        return;
+    }
     // Create an array to hold the booking data
     const bookingData = [];
     selectedSeats.forEach(seat => {
@@ -113,9 +120,17 @@ async function fetchAndDisplayBookedSeats() {
         const bookedSeats = await response.json();
         // Iterate through bookedSeats and mark the corresponding seats on the interface
         bookedSeats.forEach(seat => {
-            const seatElement = document.querySelector(`.seat[data-row="${seat.row}"][data-col="${seat.col}"]`);
-            if (seatElement) {
-                seatElement.classList.add('booked');
+            const lab = seat.lab;
+            const slotFrom = parseInt(seat.slotFrom);
+            const slotTo = parseInt(seat.slotTo);
+            const labSelector = `.seat[data-row="${seat.row}"][data-col="${seat.col}"]`;
+
+            // Check if the booked seat belongs to the selected lab and time slot range
+            if (lab === selectedLab) {
+                const seatElement = document.querySelector(labSelector);
+                if (seatElement) {
+                    seatElement.classList.add('booked');
+                }
             }
         });
     } catch (error) {
@@ -139,6 +154,9 @@ seatGrid.addEventListener("click", function(event) {
         }
     }
 });
-
+document.getElementById("labName").addEventListener("change", function() {
+    selectedLab = this.value; // Update selectedLab when the dropdown changes
+    fetchAndDisplayBookedSeats(); // Call fetchAndDisplayBookedSeats to update the booked seats display
+});
 // Initialize grid for default selected lab
 generateGrid(document.getElementById("labName").value);
